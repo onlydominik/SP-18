@@ -1,0 +1,6 @@
+@use "../base/font-face";
+body {
+  font-family: var(--ff-main);
+  font-weight: var(--fw-400);
+  background-color: var(--clr-accent-100);
+}

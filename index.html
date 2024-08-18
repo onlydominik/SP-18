@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dist/main.css">
+  <title>Frontend Mentor | Contact form</title>
+</head>
+
+<body>
+  <main>
+    <form action="#" method="GET">
+      <h1>Contact Us</h1>
+
+      <div class="form__item">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName">
+      </div>
+
+      <div class="form__item">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName">
+      </div>
+
+      <div class="form__item">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email">
+      </div>
+
+      <div class="form__item form__item--radio">
+        <label>Query Type</label>
+
+        <label class="form__label--radio" for="general">
+          <input type="radio" name="queryType" id="general" value="general">General Enquiry</label>
+        <label class="form__label--radio" for="support">
+          <input type="radio" name="queryType" id="support" value="support">Support Request</label>
+      </div>
+
+      <div class="form__item">
+        <label for="message">Message</label>
+        <textarea id="message"></textarea>
+      </div>
+
+      <div class="form__item form__item--inline">
+        <input type="checkbox" name="policy" id="policy" required>
+        <label for="policy">I consent to being contacted by the team</label>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+</body>
+
+</html>
