@@ -1,10 +1,15 @@
-button[type="submit"] {
+.btn {
   font-weight: 600;
   background-color: var(--clr-primary-600);
   color: var(--clr-white-100);
   border: none;
   width: 100%;
-  padding: var(--size-100);
+  padding: 1.3rem;
   border-radius: var(--size-radius);
   cursor: pointer;
+  &:hover {
+    background-color: var(--clr-primary-700);
+  }
+  font-size: 1rem;
+  letter-spacing: 0.03em;
 }

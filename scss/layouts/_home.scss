@@ -1,6 +1,16 @@
 @use "../base/font-face";
+@use "../abstract/sizes" as *;
 body {
-  font-family: var(--ff-main);
   font-weight: var(--fw-400);
   background-color: var(--clr-accent-100);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+}
+
+main {
+  width: clamp(230px, 90%, 900px);
+  margin-block: var(--size-100);
 }
