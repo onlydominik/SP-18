@@ -15,19 +15,19 @@
 
       <div class="form__item">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" data-err="Enter your name!" onblur="handleFirstName()">
+        <input type="text" id="firstName" name="firstName" data-err="This field is required" required>
         <p class="invalid-value-msg invalid-value-msg--firstName"></p>
       </div>
 
       <div class="form__item">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName" data-err="Enter your last name!" onblur="handleLastName()">
+        <input type="text" id="lastName" name="lastName" data-err="This field is required" required>
         <p class="invalid-value-msg invalid-value-msg--lastName"></p>
       </div>
 
       <div class="form__item">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" data-err="Enter your email address!" onblur="handleEmail()">
+        <input type="email" id="email" name="email" data-err="Please enter a valid email address" required>
         <p class="invalid-value-msg invalid-value-msg--email"></p>
       </div>
 
@@ -35,25 +35,35 @@
         <label>Query Type</label>
 
         <label class="form__label--radio" for="general">
-          <input type="radio" name="queryType" id="general" value="general">General Enquiry</label>
+          <input customradio type="radio" name="queryType" id="general" value="general"
+            data-err="Please select a query type">General Enquiry</label>
+
         <label class="form__label--radio" for="support">
-          <input type="radio" name="queryType" id="support" value="support">Support Request</label>
+          <input customradio type="radio" name="queryType" id="support" value="support"
+            data-err="Please select a query type">Support Request</label>
+        <p class="invalid-value-msg invalid-value-msg--radio"></p>
       </div>
 
       <div class="form__item">
         <label for="textarea">Message</label>
-        <textarea id="textarea" data-err="Write something to us!" onblur="handleTextarea()"></textarea>
+        <textarea id="textarea" data-err="This field is required" required></textarea>
         <p class="invalid-value-msg invalid-value-msg--textarea"></p>
       </div>
 
       <div class="form__item form__item--inline">
-        <input type="checkbox" name="policy" id="policy">
+        <input customcheckbox type="checkbox" name="policy" id="policy"
+          data-err="To submit, please consent to being contacted">
         <label for="policy">I consent to being contacted by the team</label>
+        <p class="invalid-value-msg invalid-value-msg--policy"></p>
       </div>
 
-      <button class="btn" type="submit" disabled="true">Submit</button>
+      <button class="btn" type="submit">Submit</button>
     </form>
   </main>
+  <div id="submitPopup">
+    <p>Message Sent!</p>
+    <p>Thanks for completing the form. We'll be in touch soon!</p>
+  </div>
   <script src="main.js"></script>
 </body>
 

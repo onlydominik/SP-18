@@ -1,59 +1,122 @@
+//CUSTOM VALIDATION
+const showPopup = function () {
+document.querySelector("#contact-form").addEventListener("submit", e => {
+   document.querySelector("#submitPopup").classList.add("show");
+ });
+};
+const validateForm = (formSelector) => {
+  const formElement = document.querySelector(formSelector);
 
-const form = document.querySelector("#contact-form");
-const formData = new FormData(form);
+  const validationOptions = [
+    {
+      attribute: "required",
+      isValid: (input) => input.value.trim() !== "",
+      errorMessage: (input) => input.dataset.err,
+    },
 
-let firstNameIsCorrect = true;
-let lastNameIsCorrect = true;
-let emailIsCorrect = true;
-let textareaIsCorrect = false;
-let nowe;
+    {
+      attribute: "customcheckbox",
+      isValid: (input) => input.checked == true,
+      errorMessage: (input) => input.dataset.err,
+    },
 
-let msg ="";
-const handleFirstName = () => {
-    msg = firstName.dataset.err;
-    showErrMsg(firstNameIsCorrect, firstName, msg)
-}
+    {
+      attribute: "customradio",
+      isValid: (input) => {
+        let radioInput = document.querySelector(
+          "input[name='queryType']:checked"
+        );
+        if (radioInput == null) {
+          return false;
+        }
 
-const handleLastName = () => {
-    msg = lastName.dataset.err;
-    showErrMsg(lastNameIsCorrect, lastName, msg)
-}
+        return true;
+      },
+      errorMessage: (input) => input.dataset.err,
+    },
+  ];
+  let arr = [];
+  const validateSingleFormGroup = (formGroup) => {
+    const input = formGroup.querySelector("input, textarea");
 
-const handleEmail = () => {
-    msg = email.dataset.err;
-    showErrMsg(emailIsCorrect, email, msg)
-}
-const handleTextarea = () => {
-    msg = textarea.dataset.err;
-    showErrMsg(textareaIsCorrect, textarea, msg)
-}
+    errorContainer = formGroup.querySelector(".invalid-value-msg");
+    if (!errorContainer)
+      errorContainer = document.querySelector(".invalid-value-msg--radio"); //for radio error msg
+    let formGroupError = false;
+    for (const option of validationOptions) {
+      if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
+        errorContainer.textContent = option.errorMessage(input);
+        input.classList.add("input-validate-error");
+        formGroupError = true;
+      }
+    }
 
+    if (!formGroupError) {
+      errorContainer.textContent = "";
+      input.classList.remove("input-validate-error");
+    }
 
-const showErrMsg = (cos, elem, msg) => {  
-    document.querySelector(".btn").disabled = !wlaczone;
-    if(!elem.value) {
-        document.querySelector(".invalid-value-msg--" + elem.id).innerHTML = msg;
-        wlaczone = false;
-        return;
-    }  
-        document.querySelector(".invalid-value-msg--" + elem.id).innerHTML = "";
-     
-        wlaczone = true;
+    arr.push(!formGroupError);
+  };
 
-      
-     
-}
-//$: wlaczone = firstNameIsCorrect && lastNameIsCorrect && emailIsCorrect && textareaIsCorrect;
-$: wlaczone = false;
+  formElement.setAttribute("novalidate", "");
+  Array.from(formElement.elements).forEach((element) => {
+    element.addEventListener("blur", (event) => {
+      validateSingleFormGroup(event.srcElement.parentElement);
+    });
+  });
 
+  formElement.addEventListener("submit", (e) => {
+    const formIsValid = validateAllFormGroups(formElement);
 
-form.addEventListener("keydown", () => {
- 
-    document.querySelector(".btn").disabled = !wlaczone;
+    if (!formIsValid) {
+      e.preventDefault();
+      console.log("Form invalid!");
+    } else {
+      e.preventDefault();
+
+      console.log("Form valid!");
+    }
+  });
+
+  const validateAllFormGroups = (formToValidate) => {
+    const formGroups = Array.from(
+      formToValidate.querySelectorAll(".form__item")
+    );
+
+  
+    arr = [];
+    formGroups.forEach((formGroup) => validateSingleFormGroup(formGroup));
+    console.log(arr);
+    if (arr.includes(false)) {
+      return false;
+    } else 
+    {
+      return true;
+    };
+  };
+};
+
+validateForm("#contact-form");
+
+// COLORED RADIO LABEL
+let refreshRadio = document.querySelector("input[type='radio']:checked");
+if (refreshRadio)
+  refreshRadio.parentNode.style.background = "hsl(148, 38%, 91%)";
+
+let parent;
+let form = document.querySelector("#contact-form");
+let selectedRadio = refreshRadio;
+form.addEventListener("click", (e) => {
+  if (e.target.type == "radio") {
+    if (selectedRadio) {
+      parent = selectedRadio.parentNode;
+      parent.style.background = "white";
+    }
+    parent = e.target.parentNode;
+    parent.style.background = "hsl(148, 38%, 91%)";
+    selectedRadio = e.target;
+  }
 });
 
-
-
-
-
-
+// ON SUBMIT
