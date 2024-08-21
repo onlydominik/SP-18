@@ -15,18 +15,20 @@
 
       <div class="form__item">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName">
-
+        <input type="text" id="firstName" name="firstName" data-err="Enter your name!" onblur="handleFirstName()">
+        <p class="invalid-value-msg invalid-value-msg--firstName"></p>
       </div>
 
       <div class="form__item">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName">
+        <input type="text" id="lastName" name="lastName" data-err="Enter your last name!" onblur="handleLastName()">
+        <p class="invalid-value-msg invalid-value-msg--lastName"></p>
       </div>
 
       <div class="form__item">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" data-err="Enter your email address!" onblur="handleEmail()">
+        <p class="invalid-value-msg invalid-value-msg--email"></p>
       </div>
 
       <div class="form__item form__item--radio">
@@ -39,16 +41,17 @@
       </div>
 
       <div class="form__item">
-        <label for="message">Message</label>
-        <textarea id="message"></textarea>
+        <label for="textarea">Message</label>
+        <textarea id="textarea" data-err="Write something to us!" onblur="handleTextarea()"></textarea>
+        <p class="invalid-value-msg invalid-value-msg--textarea"></p>
       </div>
 
       <div class="form__item form__item--inline">
-        <input type="checkbox" name="policy" id="policy" required>
+        <input type="checkbox" name="policy" id="policy">
         <label for="policy">I consent to being contacted by the team</label>
       </div>
 
-      <button class="btn" type="submit">Submit</button>
+      <button class="btn" type="submit" disabled="true">Submit</button>
     </form>
   </main>
   <script src="main.js"></script>
