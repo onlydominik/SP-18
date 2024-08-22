@@ -1,9 +1,15 @@
-//CUSTOM VALIDATION
-const showPopup = function () {
-document.querySelector("#contact-form").addEventListener("submit", e => {
-   document.querySelector("#submitPopup").classList.add("show");
- });
+//POPUP
+let firstLoop;
+const submitPopup = document.querySelector("#submitPopup");
+const popupIsVisible = (status) => {
+  if (status) {
+    firstLoop = true;
+    submitPopup.classList.add("show");
+    setTimeout(popupIsVisible, 3000);
+    return;
+  } else submitPopup.classList.remove("show");
 };
+//CUSTOM VALIDATION
 const validateForm = (formSelector) => {
   const formElement = document.querySelector(formSelector);
 
@@ -15,30 +21,39 @@ const validateForm = (formSelector) => {
     },
 
     {
-      attribute: "customcheckbox",
+      attribute: "data-customcheckbox",
       isValid: (input) => input.checked == true,
       errorMessage: (input) => input.dataset.err,
     },
 
     {
-      attribute: "customradio",
+      attribute: "data-customradio",
       isValid: (input) => {
         let radioInput = document.querySelector(
           "input[name='queryType']:checked"
         );
-        if (radioInput == null) {
-          return false;
-        }
-
+        if (radioInput == null) return false;
         return true;
+      },
+      errorMessage: (input) => input.dataset.err,
+    },
+
+    {
+      attribute: "data-emailpattern",
+      isValid: (input) => {
+        const regex = new RegExp(input.pattern);
+        return regex.test(input.value);
       },
       errorMessage: (input) => input.dataset.err,
     },
   ];
   let arr = [];
   const validateSingleFormGroup = (formGroup) => {
-    const input = formGroup.querySelector("input, textarea");
-
+    let input = formGroup.querySelector("input, textarea");
+    if (firstLoop) {
+      firstLoop = null;
+      return;
+    }
     errorContainer = formGroup.querySelector(".invalid-value-msg");
     if (!errorContainer)
       errorContainer = document.querySelector(".invalid-value-msg--radio"); //for radio error msg
@@ -67,15 +82,26 @@ const validateForm = (formSelector) => {
   });
 
   formElement.addEventListener("submit", (e) => {
+    formElement.focus();
     const formIsValid = validateAllFormGroups(formElement);
+
+    form.addEventListener("reset", function (event) {
+      let autofocusField = form.querySelector("button");
+      if (autofocusField instanceof HTMLInputElement) {
+        autofocusField.focus();
+      }
+    });
 
     if (!formIsValid) {
       e.preventDefault();
-      console.log("Form invalid!");
+      popupIsVisible(false);
     } else {
       e.preventDefault();
+      form.reset();
+      popupIsVisible(true);
 
-      console.log("Form valid!");
+      let radios = document.querySelectorAll("input[type='radio']");
+      radios.forEach((radio) => (radio.parentNode.style.background = ""));
     }
   });
 
@@ -83,17 +109,10 @@ const validateForm = (formSelector) => {
     const formGroups = Array.from(
       formToValidate.querySelectorAll(".form__item")
     );
-
-  
     arr = [];
     formGroups.forEach((formGroup) => validateSingleFormGroup(formGroup));
-    console.log(arr);
-    if (arr.includes(false)) {
-      return false;
-    } else 
-    {
-      return true;
-    };
+    if (arr.includes(false)) return false;
+    else return true;
   };
 };
 
@@ -101,12 +120,12 @@ validateForm("#contact-form");
 
 // COLORED RADIO LABEL
 let refreshRadio = document.querySelector("input[type='radio']:checked");
-if (refreshRadio)
-  refreshRadio.parentNode.style.background = "hsl(148, 38%, 91%)";
+if (refreshRadio) refreshRadio.parentNode.style.background = "white";
 
 let parent;
 let form = document.querySelector("#contact-form");
 let selectedRadio = refreshRadio;
+let stala;
 form.addEventListener("click", (e) => {
   if (e.target.type == "radio") {
     if (selectedRadio) {
@@ -118,5 +137,3 @@ form.addEventListener("click", (e) => {
     selectedRadio = e.target;
   }
 });
-
-// ON SUBMIT

@@ -2,10 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Dominik">
+  <meta name="description" content="Contact form">
+  <meta property="og:title" content="Contact form">
+  <meta property="og:description" content="Nice, custom Contact form">
+  <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="./dist/main.css">
-  <title>Frontend Mentor | Contact form</title>
+
+  <title>Contact form</title>
 </head>
 
 <body>
@@ -27,7 +33,8 @@
 
       <div class="form__item">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" data-err="Please enter a valid email address" required>
+        <input data-emailpattern type="email" id="email" name="email" data-err="Please enter a valid email address"
+          autocomplete="email" pattern="[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}" required>
         <p class="invalid-value-msg invalid-value-msg--email"></p>
       </div>
 
@@ -35,11 +42,11 @@
         <label>Query Type</label>
 
         <label class="form__label--radio" for="general">
-          <input customradio type="radio" name="queryType" id="general" value="general"
+          <input data-customradio type="radio" name="queryType" id="general" value="general"
             data-err="Please select a query type">General Enquiry</label>
 
         <label class="form__label--radio" for="support">
-          <input customradio type="radio" name="queryType" id="support" value="support"
+          <input data-customradio type="radio" name="queryType" id="support" value="support"
             data-err="Please select a query type">Support Request</label>
         <p class="invalid-value-msg invalid-value-msg--radio"></p>
       </div>
@@ -51,7 +58,7 @@
       </div>
 
       <div class="form__item form__item--inline">
-        <input customcheckbox type="checkbox" name="policy" id="policy"
+        <input data-customcheckbox type="checkbox" name="policy" id="policy"
           data-err="To submit, please consent to being contacted">
         <label for="policy">I consent to being contacted by the team</label>
         <p class="invalid-value-msg invalid-value-msg--policy"></p>
@@ -62,7 +69,7 @@
   </main>
   <div id="submitPopup">
     <p>Message Sent!</p>
-    <p>Thanks for completing the form. We'll be in touch soon!</p>
+    <p class="submitPopup__desc">Thanks for completing the form. We'll be in touch soon!</p>
   </div>
   <script src="main.js"></script>
 </body>
