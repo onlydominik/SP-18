@@ -188,7 +188,7 @@ input[type="checkbox"]:checked:hover:before {
   background-color: var(--clr-primary-800);
   color: white;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 0;
   & p:first-child::before {
     vertical-align: sub;
     content: url(../assets/images/icon-success-check.svg);
@@ -204,6 +204,14 @@ input[type="checkbox"]:checked:hover:before {
 .show {
   display: block !important;
   cursor: default;
+}
+
+@media (min-width: 450px) {
+  #submitPopup {
+    border-radius: 10px;
+    position: absolute;
+    top: 0.5rem;
+  }
 }
 
 @media (min-width: 900px) {
