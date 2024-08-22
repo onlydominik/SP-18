@@ -7,10 +7,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
+  min-height: 100dvh;
 }
 
 main {
-  width: clamp(230px, 90%, 900px);
+  width: clamp(230px, 90%, 800px);
   margin-block: var(--size-100);
 }
