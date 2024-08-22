@@ -191,7 +191,7 @@ input[type="checkbox"]:checked:hover:before {
   border-radius: 10px;
   & p:first-child::before {
     vertical-align: top;
-    content: url(/assets/images/icon-success-check.svg);
+    content: url(assets/images/icon-success-check.svg);
     margin-inline-end: 0.5rem;
   }
 }
