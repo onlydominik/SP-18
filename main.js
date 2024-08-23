@@ -137,3 +137,19 @@ form.addEventListener("click", (e) => {
     selectedRadio = e.target;
   }
 });
+
+// let parent;
+// let form = document.querySelector("#contact-form");
+// let selectedRadio = refreshRadio;
+// let stala;
+// form.addEventListener("click", (e) => {
+//   if (e.target.type == "radio") {
+//     if (selectedRadio) {
+//       parent = selectedRadio.parentNode;
+//       parent.style.background = "white";
+//     }
+//     parent = e.target.parentNode;
+//     parent.style.background = "hsl(148, 38%, 91%)";
+//     selectedRadio = e.target;
+//   }
+// });
